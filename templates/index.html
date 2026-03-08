@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Caisse Familiale</title>
+</head>
+
+<body>
+
+<h1>Caisse Familiale</h1>
+
+<h3>Administrateur : {{admin}}</h3>
+
+<a href="/membres">Gérer les membres</a>
+
+<h2>Ajouter paiement</h2>
+
+<form action="/ajouter_paiement" method="post">
+
+Membre :
+<select name="membre_id">
+
+{% for m in membres %}
+<option value="{{m[0]}}">{{m[1]}}</option>
+{% endfor %}
+
+</select>
+
+<br><br>
+
+Mois:
+<select name="mois">
+<option>January</option>
+<option>February</option>
+<option>March</option>
+<option>April</option>
+<option>May</option>
+<option>June</option>
+<option>July</option>
+<option>August</option>
+<option>September</option>
+<option>October</option>
+<option>November</option>
+<option>December</option>
+</select>
+
+<br><br>
+
+Année :
+<input type="number" name="annee">
+
+<br><br>
+
+Type :
+<select name="type">
+<option>Depot</option>
+<option>Retrait</option>
+</select>
+
+<br><br>
+
+Montant :
+<input type="number" name="montant">
+
+<br><br>
+
+<button>Ajouter</button>
+
+</form>
+
+<h2>Historique paiements</h2>
+
+<table border="1">
+
+<tr>
+<th>ID</th>
+<th>Nom</th>
+<th>Mois</th>
+<th>Année</th>
+<th>Type</th>
+<th>Montant</th>
+<th>Action</th>
+</tr>
+
+{% for p in paiements %}
+
+<tr>
+<td>{{p[0]}}</td>
+<td>{{p[1]}}</td>
+<td>{{p[2]}}</td>
+<td>{{p[3]}}</td>
+<td>{{p[4]}}</td>
+<td>{{p[5]}} FC</td>
+
+<td>
+<a href="/supprimer_paiement/{{p[0]}}">Supprimer</a>
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<h2>Total caisse : {{total}} FC</h2>
+
+<h2>Total cotisation par membre</h2>
+
+<table border="1">
+
+<tr>
+<th>Membre</th>
+<th>Total</th>
+</tr>
+
+{% for t in totaux_membres %}
+
+<tr>
+<td>{{t[0]}}</td>
+<td>{{t[1]}} FC</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+</html>

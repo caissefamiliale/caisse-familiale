@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Membres</title>
+</head>
+
+<body>
+
+<h1>Gestion des membres</h1>
+
+<a href="/">Retour</a>
+
+<h2>Ajouter membre</h2>
+
+<form action="/ajouter_membre" method="post">
+
+Nom :
+<input type="text" name="nom">
+
+<button>Ajouter</button>
+
+</form>
+
+<h2>Liste membres</h2>
+
+<table border="1">
+
+<tr>
+<th>ID</th>
+<th>Nom</th>
+<th>Modifier</th>
+<th>Supprimer</th>
+</tr>
+
+{% for m in membres %}
+
+<tr>
+
+<td>{{m[0]}}</td>
+
+<td>
+
+<form action="/modifier_membre" method="post">
+
+<input type="hidden" name="id" value="{{m[0]}}">
+<input type="text" name="nom" value="{{m[1]}}">
+
+<button>Modifier</button>
+
+</form>
+
+</td>
+
+<td>
+<a href="/supprimer_membre/{{m[0]}}">Supprimer</a>
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+</html>
